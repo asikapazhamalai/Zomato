@@ -3,488 +3,149 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advanced Zomato</title>
+<title>Zomato Full Stack</title>
 
-<style>
+<link rel="stylesheet" href="style.css">
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
-body{
-    overflow:hidden;
-    animation:bgchange 10s infinite alternate;
-}
-
-/* BACKGROUND COLORS */
-
-@keyframes bgchange{
-
-    0%{background:#ff0055;}
-    20%{background:#ff8800;}
-    40%{background:#00ffaa;}
-    60%{background:#0066ff;}
-    80%{background:#7700ff;}
-    100%{background:#ff0044;}
-
-}
-
-/* GLOW EFFECT */
-
-body::before{
-    content:"";
-    position:fixed;
-    width:200%;
-    height:200%;
-    background:radial-gradient(circle, rgba(255,255,255,0.2), transparent 70%);
-    animation:rotatebg 20s linear infinite;
-}
-
-@keyframes rotatebg{
-
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-/* NAVBAR */
-
-nav{
-    width:100%;
-    padding:20px 50px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:fixed;
-    top:0;
-    z-index:1000;
-    background:rgba(0,0,0,0.4);
-    backdrop-filter:blur(15px);
-}
-
-.logo{
-    color:white;
-    font-size:40px;
-    font-weight:bold;
-    text-shadow:0 0 20px yellow;
-}
-
-.menu a{
-    color:white;
-    text-decoration:none;
-    margin-left:25px;
-    font-size:22px;
-    transition:0.5s;
-}
-
-.menu a:hover{
-    color:yellow;
-    text-shadow:0 0 20px yellow;
-}
-
-/* PAGE */
-
-.page{
-    width:100%;
-    height:100vh;
-    position:absolute;
-    top:0;
-    left:0;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
-    color:white;
-    padding-top:100px;
-}
-
-.active{
-    display:flex;
-}
-
-/* HOME */
-
-.home h1{
-    font-size:90px;
-    animation:zoom 3s infinite alternate;
-    text-shadow:0 0 20px black;
-}
-
-@keyframes zoom{
-
-    from{
-        transform:scale(1);
-    }
-
-    to{
-        transform:scale(1.1);
-    }
-
-}
-
-.home p{
-    margin-top:20px;
-    font-size:28px;
-}
-
-.home input{
-    width:400px;
-    padding:18px;
-    border:none;
-    border-radius:40px;
-    margin-top:30px;
-    outline:none;
-    font-size:18px;
-    box-shadow:0 0 30px white;
-}
-
-/* BUTTERFLIES */
-
-.butterfly{
-    position:absolute;
-    font-size:40px;
-    animation:fly 15s linear infinite;
-}
-
-.b1{left:5%;animation-duration:12s;}
-.b2{left:20%;animation-duration:15s;}
-.b3{left:40%;animation-duration:18s;}
-.b4{left:60%;animation-duration:14s;}
-.b5{left:80%;animation-duration:20s;}
-
-@keyframes fly{
-
-    0%{
-        transform:translateY(100vh) rotate(0deg);
-        opacity:0;
-    }
-
-    20%{
-        opacity:1;
-    }
-
-    100%{
-        transform:translateY(-120vh) rotate(360deg);
-        opacity:0;
-    }
-
-}
-
-/* TITLES */
-
-.title{
-    font-size:65px;
-    margin-bottom:40px;
-    text-shadow:0 0 20px black;
-}
-
-/* FOOD CARDS */
-
-.foods{
-    display:flex;
-    gap:30px;
-    flex-wrap:wrap;
-    justify-content:center;
-}
-
-.card{
-    width:300px;
-    background:rgba(255,255,255,0.2);
-    backdrop-filter:blur(15px);
-    border-radius:25px;
-    overflow:hidden;
-    box-shadow:0 0 30px rgba(0,0,0,0.5);
-    transition:0.5s;
-}
-
-.card:hover{
-    transform:scale(1.08) rotate(2deg);
-}
-
-.card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-}
-
-.card h2{
-    margin:15px;
-}
-
-.card p{
-    margin-bottom:15px;
-}
-
-.btn{
-    display:block;
-    margin:20px;
-    padding:12px;
-    background:red;
-    color:white;
-    text-decoration:none;
-    border-radius:30px;
-    transition:0.5s;
-}
-
-.btn:hover{
-    background:black;
-    transform:scale(1.1);
-}
-
-/* REVIEWS */
-
-.review-container{
-    display:flex;
-    gap:30px;
-    flex-wrap:wrap;
-    justify-content:center;
-}
-
-.review{
-    width:320px;
-    padding:25px;
-    border-radius:25px;
-    background:rgba(255,255,255,0.2);
-    backdrop-filter:blur(15px);
-    box-shadow:0 0 30px rgba(0,0,0,0.5);
-    transition:0.5s;
-}
-
-.review:hover{
-    transform:translateY(-10px) scale(1.05);
-}
-
-/* ORDER */
-
-.order input{
-    width:350px;
-    padding:15px;
-    margin:15px;
-    border:none;
-    border-radius:30px;
-    outline:none;
-    font-size:18px;
-}
-
-.order button{
-    padding:15px 40px;
-    border:none;
-    border-radius:30px;
-    background:red;
-    color:white;
-    font-size:20px;
-    cursor:pointer;
-    transition:0.5s;
-}
-
-.order button:hover{
-    background:black;
-    transform:scale(1.1);
-}
-
-footer{
-    margin-top:40px;
-    font-size:20px;
-}
-
-</style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-
 <nav>
+    <div class="logo">ZOMATO</div>
 
-<div class="logo">ZOMATO</div>
-
-<div class="menu">
-
-<a href="#" onclick="showPage('home')">Home</a>
-
-<a href="#" onclick="showPage('food')">Food Menu</a>
-
-<a href="#" onclick="showPage('review')">Reviews</a>
-
-<a href="#" onclick="showPage('order')">Order</a>
-
-</div>
-
+    <div class="menu">
+        <a href="#" onclick="showPage('home')">Home</a>
+        <a href="#" onclick="showPage('food')">Food Menu</a>
+        <a href="#" onclick="showPage('review')">Reviews</a>
+        <a href="#" onclick="showPage('order')">Order</a>
+    </div>
 </nav>
-
-<!-- HOME PAGE -->
 
 <div class="page home active" id="home">
 
-<!-- BUTTERFLIES ONLY HOME -->
+    <div class="butterfly b1">🦋</div>
+    <div class="butterfly b2">🦋</div>
+    <div class="butterfly b3">🦋</div>
+    <div class="butterfly b4">🦋</div>
+    <div class="butterfly b5">🦋</div>
 
-<div class="butterfly b1">🦋</div>
-<div class="butterfly b2">🦋</div>
-<div class="butterfly b3">🦋</div>
-<div class="butterfly b4">🦋</div>
-<div class="butterfly b5">🦋</div>
+    <h1>Delicious Food World</h1>
+    <p>Experience Amazing Food</p>
 
-<h1>Delicious Food World</h1>
-
-<p>Experience Amazing Food With Flying Butterflies</p>
-
-<input type="text" placeholder="Search Food Here...">
+    <input type="text" placeholder="Search Food Here...">
 
 </div>
-
-<!-- FOOD PAGE -->
 
 <div class="page" id="food">
 
-<h1 class="title">Food Menu</h1>
+    <h1 class="title">Food Menu</h1>
 
-<div class="foods">
+    <div class="foods">
 
-<div class="card">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80">
+            <h2>Pizza</h2>
+            <p>Cheesy Italian Pizza</p>
+            <a href="#" class="btn">Order Now</a>
+        </div>
 
-<img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80">
+            <h2>Burger</h2>
+            <p>Hot Spicy Burger</p>
+            <a href="#" class="btn">Order Now</a>
+        </div>
 
-<h2>Pizza</h2>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800&q=80">
+            <h2>Biriyani</h2>
+            <p>Hyderabad Biriyani</p>
+            <a href="#" class="btn">Order Now</a>
+        </div>
 
-<p>Cheesy Italian Pizza</p>
-
-<a href="#" class="btn">Order Now</a>
-
-</div>
-
-<div class="card">
-
-<img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
-
-<h2>Burger</h2>
-
-<p>Hot Spicy Burger</p>
-
-<a href="#" class="btn">Order Now</a>
-
-</div>
-
-<div class="card">
-
-<img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d">
-
-<h2>Biriyani</h2>
-
-<p>Hyderabad Biriyani</p>
-
-<a href="#" class="btn">Order Now</a>
+    </div>
 
 </div>
-
-</div>
-
-</div>
-
-<!-- REVIEW PAGE -->
 
 <div class="page" id="review">
 
-<h1 class="title">Customer Reviews</h1>
+    <h1 class="title">Customer Reviews</h1>
 
-<div class="review-container">
+    <div class="review-container">
 
-<div class="review">
+        <div class="review">
+            <h2>Arun</h2>
+            <h3>⭐⭐⭐⭐⭐</h3>
+            <p>Very Tasty Food And Fast Delivery</p>
+        </div>
 
-<h2>Arun</h2>
+        <div class="review">
+            <h2>Priya</h2>
+            <h3>⭐⭐⭐⭐</h3>
+            <p>Amazing Experience</p>
+        </div>
 
-<h3>⭐⭐⭐⭐⭐</h3>
+        <div class="review">
+            <h2>Vijay</h2>
+            <h3>⭐⭐⭐⭐⭐</h3>
+            <p>Best Restaurant Website</p>
+        </div>
 
-<p>Very Tasty Food And Fast Delivery</p>
-
-</div>
-
-<div class="review">
-
-<h2>Priya</h2>
-
-<h3>⭐⭐⭐⭐</h3>
-
-<p>Amazing Experience And Beautiful Taste</p>
-
-</div>
-
-<div class="review">
-
-<h2>Vijay</h2>
-
-<h3>⭐⭐⭐⭐⭐</h3>
-
-<p>Best Restaurant Website Design</p>
+    </div>
 
 </div>
-
-</div>
-
-</div>
-
-<!-- ORDER PAGE -->
 
 <div class="page" id="order">
 
-<h1 class="title">Place Your Order</h1>
+    <h1 class="title">Place Your Order</h1>
 
-<div class="order">
+    <div class="order">
 
-<input type="text" placeholder="Enter Your Name">
+        <input type="text" id="name" placeholder="Enter Your Name"><br>
 
-<br>
+        <input type="text" id="foodname" placeholder="Enter Food Name"><br>
 
-<input type="text" placeholder="Enter Food Name">
+        <input type="text" id="address" placeholder="Enter Address"><br>
 
-<br>
+        <button onclick="orderFood()">Order Now</button>
 
-<input type="text" placeholder="Enter Address">
+    </div>
 
-<br>
-
-<button onclick="orderFood()">Order Now</button>
-
-</div>
-
-<footer>
-
-© 2026 Zomato Clone | Designed With ❤️
-
-</footer>
+    <footer>
+        © 2026 Zomato Clone | Designed With ❤️
+    </footer>
 
 </div>
-
-<!-- JAVASCRIPT -->
 
 <script>
 
 function showPage(pageId){
-
     let pages=document.querySelectorAll('.page');
 
     pages.forEach(function(page){
-
         page.classList.remove('active');
-
     });
 
     document.getElementById(pageId).classList.add('active');
-
 }
 
 function orderFood(){
 
-    alert("🎉 Your Food Order Successfully Placed!");
+    let name=document.getElementById("name").value;
+    let food=document.getElementById("foodname").value;
+    let address=document.getElementById("address").value;
 
+    if(name=="" || food=="" || address==""){
+        alert("Please Fill All Fields");
+    }
+    else{
+        alert(
+            "🎉 Order Placed Successfully\n\n"+
+            "Name : "+name+
+            "\nFood : "+food+
+            "\nAddress : "+address
+        );
+    }
 }
 
 </script>
